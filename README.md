@@ -66,7 +66,7 @@ __For simplicity the example class does not inherits from another interface but 
 # How It Works
 The HostedService [`Handler`](src\CacheIt\Hosting\Handler.cs), registered via [`AddCachers`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension, retrieves by reflection any `Type` that Inherits from [`ICacheable`](src\CacheIt\ICacheable.cs).
 
-t then uses the ServiceProvider to retrieve the registered services and then calls the __Load__ method if it is an Application Start, and over the life of the application and the defined refresh interval it calls the __Refresh__ method.
+It then uses the ServiceProvider to retrieve the registered services and then calls the __Load__ method if it is an Application Start, and over the life of the application and the defined refresh interval it calls the __Refresh__ method.
 
 # Custom Configuration
 Whether your update needs to be more frequent or not, you can use a custom setting in the `appsettings.json` of your project.
