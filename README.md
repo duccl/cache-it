@@ -46,7 +46,7 @@ namespace MySuperApp.Services
 > 
 > By default, the refresh time is 1 minute. See the Custom Configuration topic for more details.
 
-3. Call [`AddCachers`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension. 
+3. Call [`AddCacheIt`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension. 
 
 ```dotnet
 public void ConfigureServices(IServiceCollection services)
@@ -55,7 +55,7 @@ public void ConfigureServices(IServiceCollection services)
     ...
     services.AddSingleton<SuperRequestedService>();
     ...
-    services.AddCachers();
+    services.AddCacheIt();
 }
 ```
 
@@ -64,7 +64,7 @@ public void ConfigureServices(IServiceCollection services)
 __For simplicity the example class does not inherits from another interface but if your component/class does, there is no problem.__
 
 # How It Works
-The HostedService [`Handler`](src\CacheIt\Hosting\Handler.cs), registered via [`AddCachers`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension, retrieves by reflection any `Type` that Inherits from [`ICacheable`](src\CacheIt\ICacheable.cs).
+The HostedService [`Handler`](src\CacheIt\Hosting\Handler.cs), registered via [`AddCacheIt`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension, retrieves by reflection any `Type` that Inherits from [`ICacheable`](src\CacheIt\ICacheable.cs).
 
 It then uses the ServiceProvider to retrieve the registered services and then calls the __Load__ method if it is an Application Start, and over the life of the application and the defined refresh interval it calls the __Refresh__ method.
 

@@ -33,7 +33,7 @@ namespace CacheIt.Tests.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CacheIt.Tests.WebApi", Version = "v1" });
             });
-            services.AddCachers();
+            services.AddCacheIt();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
