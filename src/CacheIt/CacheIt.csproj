@@ -1,7 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0"/>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0"/>
@@ -9,6 +6,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0"/>
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0"/>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
+    <None Include="..\..\resources\images\Just.CacheIt_Logo.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -18,9 +16,11 @@
     <Description>Framework for Direct and Simple Update of Cache Components with .NET Extensions</Description>
     <PackageProjectUrl>https://github.com/duccl/cache-it</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <TargetFrameworks>net5.0</TargetFrameworks>
+    <TargetFramework>net5.0</TargetFramework>
     <PackageTags>cache</PackageTags>
     <RepositoryUrl>https://github.com/duccl/cache-it</RepositoryUrl>
+    <PackageIcon>Just.CacheIt_Logo.png</PackageIcon>
+    <PackageIconUrl>https://github.com/duccl/cache-it/blob/main/resources/images/Just.CacheIt_Logo.png?raw=true</PackageIconUrl>
   </PropertyGroup>
 
 </Project>
