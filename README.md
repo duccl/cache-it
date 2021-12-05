@@ -1,4 +1,9 @@
-# cache-it
+<p align="center">
+    <img src="https://github.com/duccl/cache-it/blob/main/resources/images/Just.CacheIt_Logo.png" alt="Just.CacheIt_Logo.png">
+</p>
+
+
+# Just.CacheIt
 Framework for Direct and Simple Update of Cache Components in .NET
 
 # Why Should I Use It?
