@@ -18,10 +18,16 @@ namespace CacheIt.Hosting
         private readonly IServiceProvider _provider;
         private CancellationToken _cancellationToken;
         private IEnumerable<Type> _cacheableComponents =>
+            _cacheableTypes.Concat(_cacheableTypesInterfaces);
+
+        private IEnumerable<Type> _cacheableTypes =>
             AppDomain.CurrentDomain
                 .GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(t => t.GetInterfaces().Contains(typeof(ICacheable)));
+
+        private IEnumerable<Type> _cacheableTypesInterfaces =>
+            _cacheableTypes.SelectMany(type => type.GetInterfaces().Where(type => type != typeof(ICacheable)));
 
         #endregion
 
