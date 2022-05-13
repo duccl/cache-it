@@ -11,12 +11,12 @@
 
   <PropertyGroup>
     <PackageId>Just.CacheIt</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3-preview</Version>
     <Authors>duccl</Authors>
     <Description>Framework for Direct and Simple Update of Cache Components with .NET Extensions</Description>
     <PackageProjectUrl>https://github.com/duccl/cache-it</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <PackageTags>cache</PackageTags>
     <RepositoryUrl>https://github.com/duccl/cache-it</RepositoryUrl>
     <PackageIcon>Just.CacheIt_Logo.png</PackageIcon>

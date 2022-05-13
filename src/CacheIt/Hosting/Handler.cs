@@ -35,7 +35,7 @@ namespace CacheIt.Hosting
 
         public Handler(IConfiguration configuration, ILogger<Handler> logger, IServiceProvider provider)
         {
-            _refreshInterval = TimeSpan.FromMinutes(configuration.GetValue("CacheIt:RefreshIntervalMinutes", 1));
+            _refreshInterval = TimeSpan.FromMinutes(configuration.GetValue<double>("CacheIt:RefreshIntervalMinutes", 1));
             _logger = logger;
             _provider = provider;
         }

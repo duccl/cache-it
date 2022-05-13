@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using CacheIt.Extensions.DependencyInjection;
 using CacheIt.Tests.WebApi.Service;
@@ -27,7 +26,7 @@ namespace CacheIt.Tests.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<SuperWeatherService>();
+            services.AddSingleton<ISuperWeatherService,SuperWeatherService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

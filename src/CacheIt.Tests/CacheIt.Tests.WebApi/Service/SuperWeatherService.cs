@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace CacheIt.Tests.WebApi.Service
 {
-    public class SuperWeatherService : ICacheable
+    public class SuperWeatherService : ISuperWeatherService,ICacheable
     {
         private readonly ILogger<SuperWeatherService> _logger;
-
+        private DateTime _lastUpdate = DateTime.MinValue;
         private List<string> Summaries;
 
         public SuperWeatherService(ILogger<SuperWeatherService> logger)
@@ -28,8 +28,18 @@ namespace CacheIt.Tests.WebApi.Service
 
         public Task Refresh()
         {
+            var now = DateTime.Now;
             Summaries.Add($"SuperNew {System.Guid.NewGuid()}");
-            _logger.LogInformation("Opsie, refreshed!");
+            _logger.LogInformation($"Opsie, refreshed! {now:yyyy-MM-dd hh:mm:ss.fff tt}");
+
+            if(_lastUpdate == DateTime.MinValue)
+                _lastUpdate = now;
+            else
+            {
+                _logger.LogInformation($"Now - last update time: {(now - _lastUpdate).TotalSeconds}");
+                _lastUpdate = now;
+            }
+
             return Task.CompletedTask;
         }
 
