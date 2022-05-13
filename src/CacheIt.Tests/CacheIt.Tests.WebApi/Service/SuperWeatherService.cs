@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CacheIt.Tests.WebApi.Service
 {
-    public class SuperWeatherService : ICacheable
+    public class SuperWeatherService : ISuperWeatherService,ICacheable
     {
         private readonly ILogger<SuperWeatherService> _logger;
         private DateTime _lastUpdate = DateTime.MinValue;
