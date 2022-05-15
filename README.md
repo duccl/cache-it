@@ -64,6 +64,21 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+If you want to make custom configuration for a cacheable, call the overloaded [`AddCacheIt`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension method. This method receives a `Iconfiguration` object to setup the custom refresh.
+
+```dotnet
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers();
+    ...
+    services.AddSingleton<SuperRequestedService>();
+    ...
+    services.AddCacheIt(_configuration);
+}
+```
+
+See [Custom Configuration](#custom-configuration) Section for more details.
+
 4. Start your app and Voilá!
 
 __For simplicity the example class does not inherits from another interface but if your component/class does, there is no problem.__
@@ -95,6 +110,51 @@ See the example below, that we want to refresh at each 10 minutes.
   ...
 }
 ```
+
+If you want your cacheable component to be refreshed with a custom interval, you can use the follwing example.
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Debug"
+    }
+  },
+  "AllowedHosts": "*",
+  ...
+  "CacheIt":{
+    "RefreshIntervalMinutes":10,
+    "CustomRefresh":{
+      "RefreshTimesByCacheableName":{
+        "MyCacheableComponentNameInjectedAtServices": 0.1,
+        "IMySuperCacheableComponentNameInjectedAtServices": 5
+      }
+    }
+  }
+  ...
+}
+```
+
+> **IMPORTANT** : the name must match with the class name injected at IServiceCollection!
+
+And at your services configuration
+```dotnet
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers();
+    ...
+    services.AddSingleton<MyCacheableComponentNameInjectedAtServices>();
+    services.AddSingleton<IMySuperCacheableComponentNameInjectedAtServices,MySuperCacheableComponentNameInjectedAtServices>();
+    ...
+    services.AddCacheIt(_configuration);
+}
+```
+
+# Examples
+
+1. [.NET Web Api With Just.CacheIt](/src/CacheIt.Tests/CacheIt.Tests.WebApi/)
 
 # Contributing
 
