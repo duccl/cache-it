@@ -2,6 +2,30 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.3] - To Publish
+  
+### Added
+- Custom config for refresh the cacheable componenets. [Commit Trace](https://github.com/duccl/cache-it/commit/bf822009973781f50e56f447bc067a96ec51a118)
+- More tests to validate the new version, with services registered interface and without. [Commit Trace](https://github.com/duccl/cache-it/commit/faf908d1aab2deb0b78239a941416c485efa2849)
+- New overloaded AddCacheIt method to configure the custom configs. [Commit Trace](https://github.com/duccl/cache-it/commit/72237a869bac129a4674aef5c52b93f07250c22f)
+
+### Changed
+- AddCacheIt extension. [Commit Trace](https://github.com/duccl/cache-it/commit/72237a869bac129a4674aef5c52b93f07250c22f)
+- Handler.cs Injection. [Commit Trace](https://github.com/duccl/cache-it/commit/bf822009973781f50e56f447bc067a96ec51a118)
+- Handles.cs lists with components to refresh. Using HashSet's instead of IEnumerable. [Commit Trace](https://github.com/duccl/cache-it/commit/bf822009973781f50e56f447bc067a96ec51a118)
+- Readme Description for the custom configuration. [Commit Trace](https://github.com/duccl/cache-it/commit/46fa6f31da1b88dd357afdc700a0bd76942ecd21)
+ 
+### Fixed
+
+## [1.0.3] - To Publish
+  
+### Added
+- Version [1.0.3-preview](#103---2022-05-13) as official
+
+### Changed
+ 
+### Fixed
+
 ## [1.0.3-preview] - 2022-05-13
   
 ### Added
