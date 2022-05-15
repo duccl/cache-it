@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
     <None Include="..\..\resources\images\Just.CacheIt_Logo.png" Pack="true" Visible="false" PackagePath="" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
   </ItemGroup>
 
   <PropertyGroup>
