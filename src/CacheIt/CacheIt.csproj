@@ -12,7 +12,7 @@
 
   <PropertyGroup>
     <PackageId>Just.CacheIt</PackageId>
-    <Version>1.0.3-preview</Version>
+    <Version>1.1.3-preview</Version>
     <Authors>duccl</Authors>
     <Description>Framework for Direct and Simple Update of Cache Components with .NET Extensions</Description>
     <PackageProjectUrl>https://github.com/duccl/cache-it</PackageProjectUrl>
