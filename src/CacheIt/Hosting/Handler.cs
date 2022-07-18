@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CacheIt.Options;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,27 +19,38 @@ namespace CacheIt.Hosting
         private readonly ILogger<Handler> _logger;
         private readonly IServiceProvider _provider;
         private CancellationToken _cancellationToken;
-        private IEnumerable<Type> _cacheableComponents =>
-            _cacheableTypes.Concat(_cacheableTypesInterfaces);
+        private HashSet<Type> _cacheableComponents;
+        private HashSet<Type> _cacheableTypes;
+        private HashSet<Type> _cacheableTypesInterfaces;
 
-        private IEnumerable<Type> _cacheableTypes =>
-            AppDomain.CurrentDomain
-                .GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(t => t.GetInterfaces().Contains(typeof(ICacheable)));
-
-        private IEnumerable<Type> _cacheableTypesInterfaces =>
-            _cacheableTypes.SelectMany(type => type.GetInterfaces().Where(type => type != typeof(ICacheable)));
+        private readonly CustomRefreshOptions _customRefreshOptions; 
 
         #endregion
 
         #region .: Constructor :.
 
-        public Handler(IConfiguration configuration, ILogger<Handler> logger, IServiceProvider provider)
+        public Handler(
+            IConfiguration configuration, 
+            ILogger<Handler> logger, 
+            IServiceProvider provider,
+            IOptionsMonitor<CustomRefreshOptions> options)
         {
             _refreshInterval = TimeSpan.FromMinutes(configuration.GetValue<double>("CacheIt:RefreshIntervalMinutes", 1));
             _logger = logger;
             _provider = provider;
+            _customRefreshOptions = options.CurrentValue;
+
+            _cacheableTypes = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(t => t.GetInterfaces().Contains(typeof(ICacheable)))
+                .ToHashSet();
+            _cacheableTypesInterfaces = _cacheableTypes
+                .SelectMany(type => type.GetInterfaces().Where(type => type != typeof(ICacheable)))
+                .ToHashSet();
+            _cacheableComponents = _cacheableTypes
+                .Concat(_cacheableTypesInterfaces)
+                .ToHashSet();
         }
 
         #endregion
@@ -54,7 +67,7 @@ namespace CacheIt.Hosting
             }
         }
 
-        private async Task ExecuteAsync()
+        private async Task ExecuteDefaultRefreshAsync()
         {
             while (!_cancellationToken.IsCancellationRequested)
             {
@@ -66,7 +79,7 @@ namespace CacheIt.Hosting
                     foreach (Type cacheableComponent in _cacheableComponents)
                     {
                         var component = (ICacheable)_provider.GetService(cacheableComponent);
-                        if (component != null)
+                        if (component != null && !_customRefreshOptions.RefreshTimesByCacheableName.ContainsKey(cacheableComponent.Name))
                             _ = component.Refresh().ConfigureAwait(false);
                     }
                 }
@@ -76,6 +89,45 @@ namespace CacheIt.Hosting
                 }
             }
         }
+        
+
+        private Task ExecuteCustomRefreshAsync()
+        {
+            foreach(var configuration in _customRefreshOptions.RefreshTimesByCacheableName)
+            {
+                var componentType = _cacheableComponents.FirstOrDefault(component => component.Name == configuration.Key);
+
+                if(componentType == default)
+                    continue;
+
+                var component = (ICacheable)_provider.GetService(componentType);
+
+                if (component != null)
+                    _ = Task.Run(async () => {
+                        _logger.LogDebug("Finded custom refresh for a Cacheable! Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, configuration.Value);
+                        
+                        var customRefreshInterval = TimeSpan.FromMinutes(configuration.Value);
+                        while (!_cancellationToken.IsCancellationRequested)
+                        {
+                            await Task.Delay(customRefreshInterval);
+                            _logger.LogDebug("Starting to refresh Cacheable! Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, configuration.Value);
+
+                            try
+                            {
+                                _ = component.Refresh().ConfigureAwait(false);
+                            }
+                            catch (Exception err)
+                            {
+                                _logger.LogError(err, "Error when refreshing Cacheables. Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, configuration.Value);
+                            }
+                        }
+
+                    }, cancellationToken: _cancellationToken);
+            }
+
+            return Task.CompletedTask;
+        }
+
 
         #endregion
 
@@ -87,7 +139,8 @@ namespace CacheIt.Hosting
             try
             {
                 await LoadAll();
-                _ = ExecuteAsync();
+                _ = ExecuteDefaultRefreshAsync();
+                _ = ExecuteCustomRefreshAsync();
                 _logger.LogDebug("Successfully Started Cacheable Hosted Refresh!");
             }
             catch (Exception err)

@@ -27,12 +27,15 @@ namespace CacheIt.Tests.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ISuperWeatherService,SuperWeatherService>();
+            services.AddSingleton<SuperWeatherCustom>();
+            services.AddSingleton<ISuperWeatherCustomWithInterface,SuperWeatherCustomWithInterface>();
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CacheIt.Tests.WebApi", Version = "v1" });
             });
-            services.AddCacheIt();
+            services.AddCacheIt(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

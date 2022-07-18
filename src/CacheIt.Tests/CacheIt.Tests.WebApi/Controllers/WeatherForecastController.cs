@@ -13,12 +13,17 @@ namespace CacheIt.Tests.WebApi.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly SuperWeatherService _service;
+        private readonly ISuperWeatherService _serviceSuperWeather;
+        private readonly SuperWeatherCustom _serviceSuperWeatherCustom;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, SuperWeatherService service)
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
+            ISuperWeatherService serviceSuperWeatherService,
+            SuperWeatherCustom SuperWeatherCustom)
         {
             _logger = logger;
-            _service = service;
+            _serviceSuperWeather = serviceSuperWeatherService;
+            _serviceSuperWeatherCustom = SuperWeatherCustom;
         }
 
         [HttpGet]
@@ -29,7 +34,21 @@ namespace CacheIt.Tests.WebApi.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _service.GetOne(rng.Next(_service.GetSize()))
+                Summary = _serviceSuperWeather.GetOne(rng.Next(_serviceSuperWeather.GetSize()))
+            })
+            .ToArray();
+        }
+
+
+        [HttpGet("custom")]
+        public IEnumerable<WeatherForecast> GetCustom()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = _serviceSuperWeatherCustom.GetOne(rng.Next(_serviceSuperWeatherCustom.GetSize()))
             })
             .ToArray();
         }
