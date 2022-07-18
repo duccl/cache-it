@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [1.1.3] - 2022-07-17
 
 ### Added
-- - Version [1.1.3-preview](#113-preview---2022-05-25) as official
+- Version [1.1.3-preview](#113-preview---2022-05-25) as official
 ### Changed
 
 ### Fixed
