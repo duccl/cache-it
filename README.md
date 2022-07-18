@@ -156,6 +156,10 @@ public void ConfigureServices(IServiceCollection services)
 
 1. [.NET Web Api With Just.CacheIt](/src/CacheIt.Tests/CacheIt.Tests.WebApi/)
 
+# Changelog
+
+Please go to this [guy](https://github.com/duccl/cache-it/blob/main/CHANGELOG.md)
+
 # Contributing
 
 Open a branch, code and open a PR to main and request review for any of the Contributors. For now this is the main flow.
