@@ -2,7 +2,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.1.3-preview] - To Publish
+## [1.1.3] - 2022-07-17
+
+### Added
+- - Version [1.1.3-preview](#113-preview---2022-05-25) as official
+### Changed
+
+### Fixed
+
+## [1.1.3-preview] - 2022-05-25
   
 ### Added
 - Custom config for refresh the cacheable componenets. [Commit Trace](https://github.com/duccl/cache-it/commit/bf822009973781f50e56f447bc067a96ec51a118)
