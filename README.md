@@ -24,7 +24,7 @@ namespace MySuperApp.Services
 }
 ```
 
-2. Inherit from the [`ICacheable`](src\CacheIt\ICacheable.cs) interface and call your class functions that load or update your data as needed.
+2. Inherit from the [`ICacheable`](/src/CacheIt/ICacheable.cs) interface and call your class functions that load or update your data as needed.
 
 ```dotnet
 namespace MySuperApp.Services
@@ -51,7 +51,7 @@ namespace MySuperApp.Services
 > 
 > By default, the refresh time is 1 minute. See the Custom Configuration topic for more details.
 
-3. Call [`AddCacheIt`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension. 
+3. Call [`AddCacheIt`](src/CacheIt/Extensions/DependencyInjection/ServiceCollectionExtensions.cs) Service Collection Extension. 
 
 ```dotnet
 public void ConfigureServices(IServiceCollection services)
@@ -64,7 +64,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-If you want to make custom configuration for a cacheable, call the overloaded [`AddCacheIt`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension method. This method receives a `Iconfiguration` object to setup the custom refresh.
+If you want to make custom configuration for a cacheable, call the overloaded [`AddCacheIt`](src/CacheIt/Extensions/DependencyInjection/ServiceCollectionExtensions.cs) Service Collection Extension method. This method receives a `Iconfiguration` object to setup the custom refresh.
 
 ```dotnet
 public void ConfigureServices(IServiceCollection services)
@@ -84,7 +84,7 @@ See [Custom Configuration](#custom-configuration) Section for more details.
 __For simplicity the example class does not inherits from another interface but if your component/class does, there is no problem.__
 
 # How It Works
-The HostedService [`Handler`](src\CacheIt\Hosting\Handler.cs), registered via [`AddCacheIt`](src\CacheIt\Extensions\DependencyInjection\ServiceCollectionExtensions.cs) Service Collection Extension, retrieves by reflection any `Type` that Inherits from [`ICacheable`](src\CacheIt\ICacheable.cs).
+The HostedService [`Handler`](src/CacheIt/Hosting/Handler.cs), registered via [`AddCacheIt`](src/CacheIt/Extensions/DependencyInjection/ServiceCollectionExtensions.cs) Service Collection Extension, retrieves by reflection any `Type` that Inherits from [`ICacheable`](src/CacheIt/ICacheable.cs).
 
 It then uses the ServiceProvider to retrieve the registered services and then calls the __Load__ method if it is an Application Start, and over the life of the application and the defined refresh interval it calls the __Refresh__ method.
 
@@ -155,6 +155,10 @@ public void ConfigureServices(IServiceCollection services)
 # Examples
 
 1. [.NET Web Api With Just.CacheIt](/src/CacheIt.Tests/CacheIt.Tests.WebApi/)
+
+# Changelog
+
+Please go to this [guy](https://github.com/duccl/cache-it/blob/main/CHANGELOG.md)
 
 # Contributing
 
