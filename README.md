@@ -180,6 +180,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+> _configuration refers to the [IConfiguration dependency](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0).
+
 # Examples
 
 1. [.NET Web Api With Just.CacheIt](/src/CacheIt.Tests/CacheIt.Tests.WebApi/)
