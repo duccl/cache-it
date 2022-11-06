@@ -35,10 +35,18 @@ namespace CacheIt.Hosting
             IServiceProvider provider,
             IOptionsMonitor<CustomRefreshOptions> options)
         {
-            _refreshInterval = TimeSpan.FromMinutes(configuration.GetValue<double>("CacheIt:RefreshIntervalMinutes", 1));
             _logger = logger;
             _provider = provider;
             _customRefreshOptions = options.CurrentValue;
+            
+            if(TimeSpan.TryParse(configuration.GetValue<string>("CacheIt:RefreshInterval"), out TimeSpan refreshInterval))
+            {
+                _refreshInterval = refreshInterval;
+            }
+            else
+            {
+                _refreshInterval = TimeSpan.FromMinutes(configuration.GetValue<double>("CacheIt:RefreshIntervalMinutes", 1));
+            }
 
             _cacheableTypes = AppDomain.CurrentDomain
                 .GetAssemblies()
