@@ -117,10 +117,10 @@ namespace CacheIt.Hosting
                         var configurationKey = configuration.Key;
                         while (!_cancellationToken.IsCancellationRequested)
                         {
-                            if(_customRefreshOptions.CurrentValue.RefreshTimesByCacheableName.TryGetValue(configurationKey, out TimeSpan currentIntervalRefresh))
+                            if(_customRefreshOptions.CurrentValue.RefreshTimesByCacheableName.TryGetValue(configurationKey, out TimeSpan currentRefreshInterval))
                             {
-                                await Task.Delay(currentIntervalRefresh);
-                                _logger.LogDebug("Starting to refresh Cacheable! Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, currentIntervalRefresh);
+                                await Task.Delay(currentRefreshInterval);
+                                _logger.LogDebug("Starting to refresh Cacheable! Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, currentRefreshInterval);
 
                                 try
                                 {
@@ -128,7 +128,7 @@ namespace CacheIt.Hosting
                                 }
                                 catch (Exception err)
                                 {
-                                    _logger.LogError(err, "Error when refreshing Cacheable. Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, currentIntervalRefresh);
+                                    _logger.LogError(err, "Error when refreshing Cacheable. Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, currentRefreshInterval);
                                 }
                             }
                         }
