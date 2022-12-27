@@ -117,7 +117,7 @@ namespace CacheIt.Hosting
 
                 if (component != null)
                     _ = Task.Run(async () => {
-                        _logger.LogDebug("Finded custom refresh for a Cacheable! Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, configuration.Value);
+                        _logger.LogDebug("Found custom refresh for a Cacheable! Cacheable= {Cacheable} Interval= {Interval}", configuration.Key, configuration.Value);
                         
                         var configurationKey = configuration.Key;
                         while (!_cancellationToken.IsCancellationRequested)
