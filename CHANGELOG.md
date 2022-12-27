@@ -2,6 +2,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.1.4-preview] - 2022-12-27
+  
+### Added
+- Validating if there are any misconfigured custom refreshs as type `int` from older versions, avoiding long timestamps that were minutes. [Commit Trace](https://github.com/duccl/cache-it/commit/871a5c093ff875f681272785b096c15ec2c5acdd)
+
+### Changed
+- Handler.cs TryParse improvement when trying to find the default setting, checking that `CacheIt:RefreshInterval` is set before retrieving its value. [Commit Trace](https://github.com/duccl/cache-it/commit/757e7a1332d31cf80b7f537b962442ffa7b9a8f9)
+ 
+### Fixed
+
 ## [2.1.3-preview] - 2022-11-06
   
 ### Added
