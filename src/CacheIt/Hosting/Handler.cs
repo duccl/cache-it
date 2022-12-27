@@ -39,9 +39,14 @@ namespace CacheIt.Hosting
             _provider = provider;
             _customRefreshOptions = customRefreshOptions;
             
-            if(TimeSpan.TryParse(configuration.GetValue<string>("CacheIt:RefreshInterval"), out TimeSpan refreshInterval))
+            var refreshIntervalSection = configuration.GetSection("CacheIt:RefreshInterval");
+
+            if(refreshIntervalSection.Value is not null)
             {
-                _refreshInterval = refreshInterval;
+                TimeSpan defaultRefreshInterval = TimeSpan.FromMinutes(1);
+                TimeSpan refreshInterval;
+                var parseSuccess = TimeSpan.TryParse(refreshIntervalSection.Value, out refreshInterval);
+                _refreshInterval = parseSuccess ? refreshInterval : defaultRefreshInterval;
             }
             else
             {
