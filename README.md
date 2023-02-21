@@ -4,7 +4,7 @@
 
 
 # Just.CacheIt
-Framework for Direct and Simple Update of Cache Components in .NET
+Framework for Direct and Simple Update of Cache or Reloadable Components in .NET
 
 # Why Should I Use It?
 If you want to use and refresh the cache in your application, it's a good choice to use it.
@@ -105,13 +105,41 @@ See the example below, that we want to refresh at each 10 minutes.
   "AllowedHosts": "*",
   ...
   "CacheIt":{
-    "RefreshIntervalMinutes":10
+    "RefreshInterval":"00:10:00"
   }
   ...
 }
 ```
 
 If you want your cacheable component to be refreshed with a custom interval, you can use the follwing example.
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Debug"
+    }
+  },
+  "AllowedHosts": "*",
+  ...
+  "CacheIt":{
+    "RefreshInterval":"00:10:00",
+    "CustomRefresh":{
+      "RefreshTimesByCacheableName":{
+        "MyCacheableComponentNameInjectedAtServices": "00:00:25",
+        "IMySuperCacheableComponentNameInjectedAtServices": "00:05:00"
+      }
+    }
+  }
+  ...
+}
+```
+
+Please if you are using versions lower than __2.1.3-preview__, use the following example
+
+> before 2.1.3-preview the intervals were expressed in minutes.
 
 ```json
 {
@@ -151,6 +179,8 @@ public void ConfigureServices(IServiceCollection services)
     services.AddCacheIt(_configuration);
 }
 ```
+
+> _configuration refers to the [IConfiguration dependency](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0).
 
 # Examples
 

@@ -1,27 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-    <None Include="..\..\resources\images\Just.CacheIt_Logo.png" Pack="true" Visible="false" PackagePath="" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1"/>
+    <None Include="..\..\resources\images\Just.CacheIt_Logo.png" Pack="true" Visible="false" PackagePath=""/>
   </ItemGroup>
-
   <PropertyGroup>
     <PackageId>Just.CacheIt</PackageId>
-    <Version>1.1.3</Version>
+    <Version>2.1.4</Version>
     <Authors>duccl</Authors>
-    <Description>Framework for Direct and Simple Update of Cache Components with .NET Extensions</Description>
+    <Description>Framework for Direct and Simple Update of Cache or Reloadable Components with .NET Extensions</Description>
     <PackageProjectUrl>https://github.com/duccl/cache-it</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <PackageTags>cache</PackageTags>
+    <PackageTags>Cache;Reload</PackageTags>
     <RepositoryUrl>https://github.com/duccl/cache-it</RepositoryUrl>
     <PackageIcon>Just.CacheIt_Logo.png</PackageIcon>
     <PackageIconUrl>https://github.com/duccl/cache-it/blob/main/resources/images/Just.CacheIt_Logo.png?raw=true</PackageIconUrl>
   </PropertyGroup>
-
 </Project>

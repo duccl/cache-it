@@ -2,6 +2,37 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.1.4] - 2023-02-21
+  
+### Added
+
+### Changed
+- Version 2.1.4-preview as 2.1.4
+ 
+### Fixed
+
+## [2.1.4-preview] - 2022-12-27
+  
+### Added
+- Validating if there are any misconfigured custom refreshs as type `int` from older versions, avoiding long timestamps that were minutes. [Commit Trace](https://github.com/duccl/cache-it/commit/871a5c093ff875f681272785b096c15ec2c5acdd)
+
+### Changed
+- Handler.cs TryParse improvement when trying to find the default setting, checking that `CacheIt:RefreshInterval` is set before retrieving its value. [Commit Trace](https://github.com/duccl/cache-it/commit/757e7a1332d31cf80b7f537b962442ffa7b9a8f9)
+ 
+### Fixed
+
+## [2.1.3-preview] - 2022-11-06
+  
+### Added
+
+### Changed
+- Handler.cs Try Parse for new timestamp default configuration. [Commit Trace](https://github.com/duccl/cache-it/commit/d8282b8b45b59908445c6472fdc99fa0fddf6e7f)
+- CustomRefreshOptions.cs using TimeStamp instead of double.  [Commit Trace](https://github.com/duccl/cache-it/commit/50057a553d2d300252504d3f083a6a2766cbbc6b)
+- Handler.cs correct usage of IOptionsMonitor. [Commit Trace](https://github.com/duccl/cache-it/commit/50057a553d2d300252504d3f083a6a2766cbbc6b)
+- Readme Description for the new custom configuration. [Commit Trace](https://github.com/duccl/cache-it/commit/4c6ce18c0c9b4298dded541f4fde156e49096adc)
+ 
+### Fixed
+
 ## [1.1.3] - 2022-07-17
 
 ### Added
